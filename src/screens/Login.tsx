@@ -7,7 +7,9 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import useAppNavigation from '../hooks';
+import useAppNavigation from '../hooks/useAppNavigation';
+import {useAppDispatch} from '../hooks/useStore';
+import {login} from '../store/user.slice';
 
 const HEADER_HEIGHT = Dimensions.get('window').height * 0.3;
 
@@ -19,6 +21,7 @@ function Login() {
   const [error, setError] = useState('');
 
   const navigation = useAppNavigation();
+  const dispatch = useAppDispatch();
 
   const handleChange = (field: string, value: string) => {
     setError('');
@@ -40,7 +43,8 @@ function Login() {
     }
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    dispatch(login());
     navigation.navigate('Home');
   };
 

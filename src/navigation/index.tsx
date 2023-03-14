@@ -5,10 +5,10 @@ import LoginScreen from '../screens/Login';
 
 const Stack = createNativeStackNavigator();
 
-export function StackNavigator() {
+export function StackNavigator({initial}) {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName={initial}
       screenOptions={{
         headerShown: false,
       }}>
