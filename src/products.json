@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "name": "Crock Pot Roast",
+        "ingredients": "beef roast, brown gravy mix",
+        "imgUrl": "https://loremflickr.com/cache/resized/65535_52309465858_4c4842665e_n_320_240_nofilter.jpg",
+        "price": 35
+    },
+    {
+        "id": 2,
+        "name": "Roasted Asparagus",
+        "ingredients": "asparagus, olive oil",
+        "imgUrl": "https://loremflickr.com/cache/resized/65535_52668639841_bc2b0b674d_320_240_nofilter.jpg",
+        "price": 38
+    },
+    {
+        "id": 3,
+        "name": "Curried Lentils",
+        "ingredients": 
+            "beef broth, dried green lentils",
+        "imgUrl": "https://loremflickr.com/cache/resized/7008_6803428731_8c7c72696a_320_240_nofilter.jpg",
+        "price": 43
+    },
+    {
+        "id": 4,
+        "name": "Big Night Pizza",
+        "ingredients": "yeast, flour, vegetable oil, salt",
+        "imgUrl": "http://upload.wikimedia.org/wikipedia/commons/c/c7/Spinach_pizza.jpg",
+        "price": 65
+    },
+    {
+        "id": 5,
+        "name": "Cranberry and Apple Stuffed",
+        "ingredients": "apple, dried cranberries, cinnamon",
+        "imgUrl": "https://loremflickr.com/cache/resized/29_43534373_c0872b95e3_320_240_nofilter.jpg",
+        "price": 24
+    },
+    {
+        "id": 6,
+        "name": "Mic's Yorkshire Puds",
+        "ingredients": "eggs, milk, vegetable oil",
+        "imgUrl": "http://upload.wikimedia.org/wikipedia/commons/f/f9/Yorkshire_Pudding.jpg",
+        "price": 38
+    },
+    {
+        "id": 7,
+        "name": "Old-Fashioned Cookies",
+        "ingredients": "cinnamon, oats, chopped nuts",
+        "imgUrl": "https://loremflickr.com/cache/resized/4647_39195999272_d9a0c9bbfc_320_240_nofilter.jpg",
+        "price": 80
+    },
+    {
+        "id": 8,
+        "name": "Blueberry Oatmeal Squares",
+        "ingredients": "orange, fresh blueberries, cornstarch",
+        "imgUrl": "https://loremflickr.com/cache/resized/65535_52614616088_931894e7ea_n_320_240_nofilter.jpg",
+        "price": 30
+    },
+    {
+        "id": 9,
+        "name": "Curried chicken salad",
+        "ingredients": "mayonnaise, lemon juice, tripe mangoes, green onions",
+        "imgUrl": "https://loremflickr.com/cache/resized/65535_52307233105_1492eac41d_320_240_nofilter.jpg",
+        "price": 40
+    }
+]
