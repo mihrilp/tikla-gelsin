@@ -12,4 +12,5 @@ export type ProductProps = {
   name: string;
   price: number;
   ingredients: string;
+  addToCart?: (product: ProductProps) => void;
 };

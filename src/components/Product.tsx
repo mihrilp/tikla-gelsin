@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ProductProps} from '../types';
 
-function Product({imgUrl, name, price, ingredients}: ProductProps) {
+function Product({imgUrl, name, price, ingredients, addToCart}: ProductProps) {
   return (
     <View style={styles.container}>
       <Image source={{uri: imgUrl}} style={styles.image} />
@@ -10,7 +10,7 @@ function Product({imgUrl, name, price, ingredients}: ProductProps) {
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.ingredients}>İçindekiler: {ingredients}</Text>
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={addToCart}>
         <Text style={styles.btnText}>{price} TL, Sepete EKle</Text>
       </TouchableOpacity>
     </View>

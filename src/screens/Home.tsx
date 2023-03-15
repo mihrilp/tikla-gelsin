@@ -4,14 +4,20 @@ import products from '../products.json';
 import Product from '../components/Product';
 import {ProductProps} from '../types';
 import SearchBar from '../components/SearchBar';
+import ShoppingCart from '../components/ShoppingCart';
 
 function Home() {
   const [searchText, setSearchText] = useState('');
   const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>();
+  const [basketItems, setBasketItems] = useState<ProductProps[]>([]);
+
+  const addToCart = (product: ProductProps) => {
+    setBasketItems([...basketItems, product]);
+  };
 
   const keyExtractor = (item: ProductProps) => item.id.toString();
   const renderItem = ({item}: {item: ProductProps}) => {
-    return <Product {...item} />;
+    return <Product {...item} addToCart={addToCart} />;
   };
 
   useEffect(() => {
@@ -27,6 +33,7 @@ function Home() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Ürün Listesi</Text>
+        <ShoppingCart basketItems={basketItems} />
       </View>
       <View style={styles.searchBarContainer}>
         <SearchBar handleChange={value => setSearchText(value)} />
@@ -46,10 +53,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fafafa',
   },
   header: {
+    width: '100%',
     paddingHorizontal: 20,
-    paddingVertical: 15,
-    justifyContent: 'center',
+    paddingVertical: 10,
+    justifyContent: 'space-between',
     alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 15,
   },
   title: {
     color: '#EB1730',
@@ -58,7 +68,8 @@ const styles = StyleSheet.create({
   searchBarContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 10,
+    marginBottom: 20,
+    paddingHorizontal: 20,
   },
 });
 

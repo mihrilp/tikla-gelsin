@@ -26,7 +26,7 @@ function SearchBar({handleChange, ...rest}: Props) {
 
 const styles = StyleSheet.create({
   searchBar: {
-    width: '80%',
+    width: '100%',
     height: 40,
     flexDirection: 'row',
     alignItems: 'center',
