@@ -1,13 +1,19 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {ProductProps} from '../types';
+import useAppNavigation from '../hooks/useAppNavigation';
+import {useAppSelector} from '../hooks/useStore';
 import BasketIcon from './icons/BasketIcon';
 
-function ShoppingCart({basketItems}: {basketItems: ProductProps[]}) {
+function ShoppingCart() {
+  const basketItemsCount = useAppSelector(state => state.basket.items.length);
+  const navigation = useAppNavigation();
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Basket')}
+      style={styles.container}
+      disabled={basketItemsCount === 0}>
       <BasketIcon />
-      <Text style={styles.basketItems}>{basketItems.length}</Text>
+      <Text style={styles.basketItems}>{basketItemsCount}</Text>
     </TouchableOpacity>
   );
 }

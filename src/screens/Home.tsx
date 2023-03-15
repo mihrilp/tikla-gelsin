@@ -5,19 +5,18 @@ import Product from '../components/Product';
 import {ProductProps} from '../types';
 import SearchBar from '../components/SearchBar';
 import ShoppingCart from '../components/ShoppingCart';
+import {useAppDispatch} from '../hooks/useStore';
+import {addToBasket} from '../store/basket.slice';
 
 function Home() {
   const [searchText, setSearchText] = useState('');
   const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>();
-  const [basketItems, setBasketItems] = useState<ProductProps[]>([]);
 
-  const addToCart = (product: ProductProps) => {
-    setBasketItems([...basketItems, product]);
-  };
+  const dispatch = useAppDispatch();
 
   const keyExtractor = (item: ProductProps) => item.id.toString();
   const renderItem = ({item}: {item: ProductProps}) => {
-    return <Product {...item} addToCart={addToCart} />;
+    return <Product {...item} addToCart={() => dispatch(addToBasket(item))} />;
   };
 
   useEffect(() => {
@@ -33,7 +32,7 @@ function Home() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Ürün Listesi</Text>
-        <ShoppingCart basketItems={basketItems} />
+        <ShoppingCart />
       </View>
       <View style={styles.searchBarContainer}>
         <SearchBar handleChange={value => setSearchText(value)} />
