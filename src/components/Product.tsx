@@ -1,8 +1,25 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ProductProps} from '../types';
+import {useRoute} from '@react-navigation/native';
+import {useAppSelector} from '../hooks/useStore';
 
-function Product({imgUrl, name, price, ingredients, addToCart}: ProductProps) {
+function Product({
+  id,
+  imgUrl,
+  name,
+  price,
+  ingredients,
+  addToCart,
+}: ProductProps) {
+  const route = useRoute();
+  const quantityInBasket = useAppSelector(state =>
+    state.basket.items.reduce(
+      (acc: number, val: ProductProps) => (val.id === id ? acc + 1 : acc),
+      0,
+    ),
+  );
+
   return (
     <View style={styles.container}>
       <Image source={{uri: imgUrl}} style={styles.image} />
@@ -10,9 +27,15 @@ function Product({imgUrl, name, price, ingredients, addToCart}: ProductProps) {
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.ingredients}>İçindekiler: {ingredients}</Text>
       </View>
-      <TouchableOpacity style={styles.button} onPress={addToCart}>
-        <Text style={styles.btnText}>{price} TL, Sepete EKle</Text>
-      </TouchableOpacity>
+      {route.name === 'Home' ? (
+        <TouchableOpacity style={styles.button} onPress={addToCart}>
+          <Text style={styles.btnText}>{price} TL, Sepete EKle</Text>
+        </TouchableOpacity>
+      ) : (
+        <View>
+          <Text style={styles.quantityInBasket}>{quantityInBasket}</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -58,6 +81,9 @@ const styles = StyleSheet.create({
   btnText: {
     fontSize: 12,
     fontWeight: 'bold',
+  },
+  quantityInBasket: {
+    color: '#fff',
   },
 });
 

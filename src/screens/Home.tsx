@@ -1,23 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import products from '../products.json';
-import Product from '../components/Product';
 import {ProductProps} from '../types';
 import SearchBar from '../components/SearchBar';
 import ShoppingCart from '../components/ShoppingCart';
-import {useAppDispatch} from '../hooks/useStore';
-import {addToBasket} from '../store/basket.slice';
+import ProductList from '../components/ProductList';
 
 function Home() {
   const [searchText, setSearchText] = useState('');
   const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>();
-
-  const dispatch = useAppDispatch();
-
-  const keyExtractor = (item: ProductProps) => item.id.toString();
-  const renderItem = ({item}: {item: ProductProps}) => {
-    return <Product {...item} addToCart={() => dispatch(addToBasket(item))} />;
-  };
 
   useEffect(() => {
     const filtered = products.filter(
@@ -37,11 +28,7 @@ function Home() {
       <View style={styles.searchBarContainer}>
         <SearchBar handleChange={value => setSearchText(value)} />
       </View>
-      <FlatList
-        data={filteredProducts || products}
-        keyExtractor={keyExtractor}
-        renderItem={renderItem}
-      />
+      <ProductList data={filteredProducts || products} />
     </SafeAreaView>
   );
 }
