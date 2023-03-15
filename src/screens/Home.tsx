@@ -1,23 +1,38 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import products from '../products.json';
 import Product from '../components/Product';
 import {ProductProps} from '../types';
+import SearchBar from '../components/SearchBar';
 
 function Home() {
+  const [searchText, setSearchText] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>();
+
   const keyExtractor = (item: ProductProps) => item.id.toString();
   const renderItem = ({item}: {item: ProductProps}) => {
     return <Product {...item} />;
   };
 
+  useEffect(() => {
+    const filtered = products.filter(
+      product =>
+        product.name.toLowerCase().includes(searchText.toLowerCase()) ||
+        product.ingredients.toLowerCase().includes(searchText.toLowerCase()),
+    );
+    setFilteredProducts(filtered);
+  }, [searchText]);
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Ürün Listesi</Text>
       </View>
+      <View style={styles.searchBarContainer}>
+        <SearchBar handleChange={value => setSearchText(value)} />
+      </View>
       <FlatList
-        style={styles.foods}
-        data={products}
+        data={filteredProducts || products}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
       />
@@ -28,10 +43,7 @@ function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-around',
     backgroundColor: '#fafafa',
-    paddingHorizontal: 30,
   },
   header: {
     paddingHorizontal: 20,
@@ -43,8 +55,10 @@ const styles = StyleSheet.create({
     color: '#EB1730',
     fontSize: 22,
   },
-  foods: {
-    backgroundColor: '#EB1730',
+  searchBarContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10,
   },
 });
 

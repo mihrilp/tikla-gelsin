@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#fff',
     padding: 15,
+    backgroundColor: '#EB1730',
   },
   textContainer: {
     flex: 1,
