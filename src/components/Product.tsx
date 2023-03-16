@@ -10,7 +10,8 @@ function Product({
   name,
   price,
   ingredients,
-  addToCart,
+  addToBasket,
+  removeFromBasket,
 }: ProductProps) {
   const route = useRoute();
   const quantityInBasket = useAppSelector(state =>
@@ -28,12 +29,20 @@ function Product({
         <Text style={styles.ingredients}>İçindekiler: {ingredients}</Text>
       </View>
       {route.name === 'Home' ? (
-        <TouchableOpacity style={styles.button} onPress={addToCart}>
+        <TouchableOpacity style={styles.button} onPress={addToBasket}>
           <Text style={styles.btnText}>{price} TL, Sepete EKle</Text>
         </TouchableOpacity>
       ) : (
-        <View>
+        <View style={styles.counter}>
+          <TouchableOpacity style={styles.counterBtn} onPress={addToBasket}>
+            <Text style={styles.counterBtnText}> +</Text>
+          </TouchableOpacity>
           <Text style={styles.quantityInBasket}>{quantityInBasket}</Text>
+          <TouchableOpacity
+            style={styles.counterBtn}
+            onPress={removeFromBasket}>
+            <Text style={styles.counterBtnText}> -</Text>
+          </TouchableOpacity>
         </View>
       )}
     </View>
@@ -82,8 +91,30 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
   },
+  counter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   quantityInBasket: {
     color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginHorizontal: 5,
+  },
+  counterBtn: {
+    width: 25,
+    height: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#000',
+  },
+  counterBtnText: {
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
