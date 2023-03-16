@@ -11,6 +11,7 @@ import ProductList from '../components/ProductList';
 import useAppNavigation from '../hooks/useAppNavigation';
 import {useAppSelector} from '../hooks/useStore';
 import {ProductProps} from '../types';
+import {getDiscountedPrice, getTotalPrice} from '../utils';
 
 function Basket() {
   const basketItems = useAppSelector(state => state.basket.items);
@@ -21,6 +22,10 @@ function Basket() {
       return basketItems.indexOf(item) === index;
     },
   );
+
+  const totalPrice = getTotalPrice(basketItems);
+  const discountedPrice = getDiscountedPrice(totalPrice);
+  const gain = (totalPrice - discountedPrice).toFixed(2);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,6 +38,22 @@ function Basket() {
         <Text style={styles.title}>Sepet</Text>
       </View>
       <ProductList data={uniqueItems} />
+      <View style={styles.priceInfoContainer}>
+        <Text style={styles.priceInfoText}>Toplam Fiyat: {totalPrice}</Text>
+        {basketItems.length > 1 && (
+          <>
+            <Text style={styles.priceInfoText}>
+              İndirimli Fiyat:{discountedPrice}
+            </Text>
+            <View style={styles.gain}>
+              <Text style={styles.priceInfoText}>Kazancınız: {gain}</Text>
+            </View>
+          </>
+        )}
+      </View>
+      <TouchableOpacity style={styles.buyBtn}>
+        <Text style={styles.buyText}>Satın Al </Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -58,6 +79,41 @@ const styles = StyleSheet.create({
   title: {
     color: '#EB1730',
     fontSize: 22,
+  },
+  priceInfoContainer: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginBottom: 50,
+  },
+  priceInfoText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    textAlign: 'right',
+  },
+  gain: {
+    width: '50%',
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#EB1730',
+    paddingVertical: 10,
+  },
+  buyBtn: {
+    width: '60%',
+    backgroundColor: '#EB1730',
+    padding: 10,
+    borderRadius: 20,
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: '15%',
+    left: '20%',
+  },
+  buyText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
