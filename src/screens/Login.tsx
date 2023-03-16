@@ -13,7 +13,7 @@ import {login} from '../store/user.slice';
 
 const HEADER_HEIGHT = Dimensions.get('window').height * 0.3;
 
-const validEmailRegex = RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+const validEmailRegex = RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/);
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -42,6 +42,9 @@ function Login() {
         break;
     }
   };
+
+  const disabled =
+    email.length === 0 || password.length === 0 || error.length > 0;
 
   const handleLogin = async () => {
     dispatch(login());
@@ -72,11 +75,9 @@ function Login() {
           <Text style={styles.errorText}>{error}</Text>
         </View>
         <TouchableOpacity
-          style={styles.loginBtn}
+          style={[styles.loginBtn, disabled && styles.disabled]}
           onPress={handleLogin}
-          disabled={
-            email.length === 0 || password.length === 0 || error.length > 0
-          }>
+          disabled={disabled}>
           <Text style={styles.loginText}>Giriş Yap</Text>
         </TouchableOpacity>
       </View>
@@ -133,6 +134,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
     fontWeight: 'bold',
+  },
+  disabled: {
+    opacity: 0.4,
   },
 });
 

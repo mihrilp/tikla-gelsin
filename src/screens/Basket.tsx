@@ -52,15 +52,15 @@ function Basket() {
             styles.priceInfoText,
             basketItems.length > 1 && styles.cancelPrice,
           ]}>
-          Toplam Fiyat: {totalPrice}
+          Toplam Fiyat: {totalPrice} ₺
         </Text>
         {basketItems.length > 1 && (
           <>
             <Text style={styles.priceInfoText}>
-              İndirimli Fiyat:{discountedPrice}
+              İndirimli Fiyat:{discountedPrice} ₺
             </Text>
             <View style={styles.gain}>
-              <Text style={styles.priceInfoText}>Kazancınız: {gain}</Text>
+              <Text style={styles.priceInfoText}>Kazancınız: {gain} ₺</Text>
             </View>
           </>
         )}
@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginBottom: 50,
+    position: 'absolute',
+    bottom: '20%',
   },
   priceInfoText: {
     fontSize: 18,
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopWidth: 1,
     borderTopColor: '#EB1730',
-    paddingVertical: 10,
+    paddingTop: 10,
   },
   buyBtn: {
     width: '60%',
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     position: 'absolute',
-    bottom: '15%',
+    bottom: '10%',
     left: '20%',
   },
   buyText: {
