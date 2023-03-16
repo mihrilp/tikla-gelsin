@@ -4,6 +4,7 @@ export type AppDispatch = typeof store.dispatch;
 export type StackScreens = {
   Home: undefined;
   Login: undefined;
+  Basket: undefined;
 };
 
 export type ProductProps = {

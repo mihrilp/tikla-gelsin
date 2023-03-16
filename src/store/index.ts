@@ -1,4 +1,4 @@
-import {configureStore} from '@reduxjs/toolkit';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import userReducer from './user.slice';
 import basketReducer from './basket.slice';
 import {persistStore} from 'redux-persist';
@@ -10,11 +10,17 @@ const persistConfig = {
   storage: AsyncStorage,
 };
 
+const rootReducer = combineReducers({
+  user: persistReducer(persistConfig, userReducer),
+  basket: basketReducer,
+});
+
 const store = configureStore({
-  reducer: {
-    user: persistReducer(persistConfig, userReducer),
-    basket: basketReducer,
-  },
+  reducer: rootReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export default store;
