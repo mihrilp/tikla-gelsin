@@ -2,7 +2,6 @@
 
 A mobile application where you can order foods.
 
-<br/>
 
 ## iOS
 
@@ -10,7 +9,7 @@ A mobile application where you can order foods.
 |--------|-------|----------|---------|
 | <img width="300" align="left" src="https://user-images.githubusercontent.com/58886855/225593559-0ea279ea-a071-4a13-9f0f-15d6041a4984.png" /> | <img width="300" src="https://user-images.githubusercontent.com/58886855/225594327-26ee7456-0120-4677-bf4b-0f1c4728f212.png" />  | <img width="300" src="https://user-images.githubusercontent.com/58886855/225594699-4190271e-4fc8-4d90-9820-2d1c5e39a9fb.png" />  | <img width="300" src="https://user-images.githubusercontent.com/58886855/225595078-2c6339f6-4706-478b-acc7-23572b491d17.png" /> 
 
-<br/><br/>
+<br/>
 
 ## Android
 
