@@ -13,6 +13,7 @@ const BasketSlice = createSlice({
   name: 'basket',
   initialState,
   reducers: {
+    resetBasket: () => initialState,
     addToBasket: (state, action) => {
       state.items.push(action.payload);
     },
@@ -27,5 +28,5 @@ const BasketSlice = createSlice({
   },
 });
 
-export const {addToBasket, removeFromBasket} = BasketSlice.actions;
+export const {resetBasket, addToBasket, removeFromBasket} = BasketSlice.actions;
 export default BasketSlice.reducer;

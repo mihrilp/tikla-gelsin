@@ -9,12 +9,15 @@ import {
 import BackArrow from '../components/icons/BackArrow';
 import ProductList from '../components/ProductList';
 import useAppNavigation from '../hooks/useAppNavigation';
-import {useAppSelector} from '../hooks/useStore';
+import {useAppDispatch, useAppSelector} from '../hooks/useStore';
+import {resetBasket} from '../store/basket.slice';
 import {ProductProps} from '../types';
 import {getDiscountedPrice, getTotalPrice} from '../utils';
 
 function Basket() {
   const basketItems = useAppSelector(state => state.basket.items);
+  const dispatch = useAppDispatch();
+
   const navigation = useAppNavigation();
 
   const uniqueItems = basketItems.filter(
@@ -26,6 +29,11 @@ function Basket() {
   const totalPrice = getTotalPrice(basketItems);
   const discountedPrice = getDiscountedPrice(totalPrice);
   const gain = (totalPrice - discountedPrice).toFixed(2);
+
+  const handleBuy = () => {
+    dispatch(resetBasket());
+    navigation.navigate('Home');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -39,7 +47,13 @@ function Basket() {
       </View>
       <ProductList data={uniqueItems} />
       <View style={styles.priceInfoContainer}>
-        <Text style={styles.priceInfoText}>Toplam Fiyat: {totalPrice}</Text>
+        <Text
+          style={[
+            styles.priceInfoText,
+            basketItems.length > 1 && styles.cancelPrice,
+          ]}>
+          Toplam Fiyat: {totalPrice}
+        </Text>
         {basketItems.length > 1 && (
           <>
             <Text style={styles.priceInfoText}>
@@ -51,7 +65,7 @@ function Basket() {
           </>
         )}
       </View>
-      <TouchableOpacity style={styles.buyBtn}>
+      <TouchableOpacity style={styles.buyBtn} onPress={handleBuy}>
         <Text style={styles.buyText}>Satın Al </Text>
       </TouchableOpacity>
     </SafeAreaView>
@@ -92,6 +106,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 15,
     textAlign: 'right',
+  },
+  cancelPrice: {
+    textDecorationLine: 'line-through',
   },
   gain: {
     width: '50%',
