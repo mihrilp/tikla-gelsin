@@ -19,9 +19,7 @@ function ShoppingCart() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    position: 'relative',
-  },
+  container: {},
   basketItems: {
     position: 'absolute',
     top: -8,
