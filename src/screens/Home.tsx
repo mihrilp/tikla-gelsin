@@ -1,14 +1,27 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import products from '../products.json';
 import {ProductProps} from '../types';
 import SearchBar from '../components/SearchBar';
 import ShoppingCart from '../components/ShoppingCart';
+import Logout from '../components/icons/LogOut';
 import ProductList from '../components/ProductList';
+import {useAppDispatch} from '../hooks/useStore';
+import {logout} from '../store/user.slice';
+import useAppNavigation from '../hooks/useAppNavigation';
 
 function Home() {
   const [searchText, setSearchText] = useState('');
   const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>();
+
+  const dispatch = useAppDispatch();
+  const navigation = useAppNavigation();
 
   useEffect(() => {
     const filtered = products.filter(
@@ -19,9 +32,17 @@ function Home() {
     setFilteredProducts(filtered);
   }, [searchText]);
 
+  const handleLogout = () => {
+    dispatch(logout());
+    navigation.navigate('Login');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
+        <TouchableOpacity onPress={handleLogout}>
+          <Logout />
+        </TouchableOpacity>
         <Text style={styles.title}>Ürün Listesi</Text>
         <ShoppingCart />
       </View>

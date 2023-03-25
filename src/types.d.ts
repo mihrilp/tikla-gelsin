@@ -5,6 +5,7 @@ export type StackScreens = {
   Home: undefined;
   Login: undefined;
   Basket: undefined;
+  Success: undefined;
 };
 
 export type ProductProps = {
