@@ -52,7 +52,7 @@ function Login() {
   };
 
   return (
-    <>
+    <View testID="LoginScreen">
       <View style={styles.header}>
         <Text style={styles.headerText}>Tıkla Gelsin</Text>
       </View>
@@ -81,7 +81,7 @@ function Login() {
           <Text style={styles.loginText}>Giriş Yap</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </View>
   );
 }
 

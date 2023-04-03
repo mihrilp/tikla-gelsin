@@ -19,7 +19,7 @@ function Home() {
   }, [searchText]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView testID="HomeScreen" style={styles.container}>
       <View style={styles.searchBarContainer}>
         <SearchBar handleChange={value => setSearchText(value)} />
       </View>
